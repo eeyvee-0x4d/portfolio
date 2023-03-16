@@ -63,7 +63,8 @@ const Projects = () => {
     <Box
       as='section'
       id='projects'
-      p='2rem'
+      px={{sm: '2rem', md: '10%'}}
+      py='4.5rem'
     >
       <Heading
         as='h2'
@@ -75,8 +76,11 @@ const Projects = () => {
         Projects
       </Heading>
       <Flex
-        direction='column'
-        gap='1rem'
+        direction={{sm: 'column', md: 'row'}}
+        justify='center'
+        align='center'
+        flexWrap='wrap'
+        gap='2rem'
       >
         {
           projects.map(project => {
@@ -86,6 +90,7 @@ const Projects = () => {
                 color='brand.fg'
                 overflow='hidden'
                 variant='elevated'
+                maxWidth={{sm: '768px', md: '400px'}}
               >
                 <Image
                   src={project.image}

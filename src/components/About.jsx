@@ -16,7 +16,8 @@ const About = () => {
       as='section'
       id='about-me'
       bg='brand.neutral1'
-      p='2rem'
+      px={{sm:'2rem', md: '10%', xl: '15%'}}
+      py='4.5rem'
     >
       <Text
         as='h2'
@@ -28,12 +29,14 @@ const About = () => {
         About Me
       </Text>
       <Flex
-        direction='column-reverse'
+        direction={{sm: 'column-reverse', md: 'row'}}
         justify='center'
-        align='center'
+        align={{sm: 'center', md: 'start'}}
         gap='3rem'
       >
-        <Box>
+        <Box
+          flexBasis={{md: '50%'}}
+        >
           <Text
             mb='1rem'
           >
@@ -49,7 +52,7 @@ const About = () => {
             templateColumns='repeat(2, 1fr)'
             gap='4'
             listStylePosition='inside'
-          >
+            >
             <GridItem as='li'>HTML</GridItem>
             <GridItem as='li'>CSS</GridItem>
             <GridItem as='li'>TailwindCSS</GridItem>
@@ -64,9 +67,11 @@ const About = () => {
           </Grid>
         </Box>
         <Box
+          flexBasis={{md: '50%'}}
           borderRadius='base'
           position='relative'
-          w='fit-content'
+          boxSize={{sm: '200px', md: '300px'}}
+          maxWidth='300px'
           zIndex='1'
           __css={{
             "&::before": {
@@ -120,7 +125,7 @@ const About = () => {
           <Image
             src={headShot}
             alt='head shot'
-            boxSize='200'
+            boxSize={{sm: '200px', md: '300px'}}
             />
         </Box>
       </Flex>

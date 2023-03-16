@@ -2,6 +2,7 @@ import logo from '../assets/logo.svg'
 
 import {
   Box,
+  Button,
   Drawer,
   DrawerOverlay,
   DrawerCloseButton,
@@ -55,20 +56,95 @@ const Navbar = () => {
 
   return(
     <Flex
-      position='fixed'
-      w='100%'
-      px='2rem'
+      position={{sm: 'fixed'}}
+      top='0'
+      w='100vw'
+      px={{sm: '2rem', md: '10%', xl:'15%'}}
       py='1rem'
       align='center'
       backgroundImage="linear-gradient(90deg, rgb(31, 45, 66), rgb(45, 66, 97))"
       boxShadow='rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px'
       zIndex="999"
     >
-      <Link href='#'>
-        <Image src={logo} h='2rem'/> 
+      <Link 
+        href='#'
+        tabIndex={0}
+      >
+        <Image src={logo} h='2rem' alt='logo'/> 
       </Link>
       <Spacer />
+      <Box
+        as='nav'
+        display={{sm: 'none', md: 'block'}}
+      >
+        <Flex 
+          as='ul'
+          listStyleType='none'
+          justify='center'
+          align='center'
+          gap='2rem'
+        >
+          <Box as='li'
+            position='relative'
+            __css={menuLinksAfter}
+          >
+            <Link 
+              href='#about-me'
+              position='relative'
+              _hover={menuLinksHover}
+              onClick={onClose}
+            >
+              About Me
+            </Link>
+          </Box>
+          <Box as='li'
+            position='relative'
+            __css={menuLinksAfter}
+          >
+            <Link 
+              href='#projects'
+              position='relative' 
+              _hover={menuLinksHover}
+              onClick={onClose}
+            >
+              <Text>Projects</Text>
+            </Link>
+            </Box>
+          <Box as='li'
+            position='relative'
+            __css={menuLinksAfter}
+          >
+            <Link 
+              href='#contact'
+              position='relative' 
+              _hover={menuLinksHover}
+              onClick={onClose}
+            >
+              <Text>Contact</Text>
+            </Link>
+          </Box>
+          <Box as='li'
+          >
+            <Link 
+              href='#'
+              position='relative'
+            >
+              <Button
+                bg='brand.accent2'
+                borderColor='brand.accent'
+                color='brand.accent'
+                variant='outline'
+                _hover={{
+                  bg: 'brand.accent',
+                  color: 'white'
+                }}
+              >Resume</Button>
+            </Link>
+          </Box>
+        </Flex>
+      </Box>
       <IconButton
+        display={{sm: 'block', md: 'none'}}
         colorScheme="brand.fg"
         _hover={{color: 'brand.accent'}}
         variant='outline'
@@ -76,8 +152,15 @@ const Navbar = () => {
         icon={<HamburgerIcon />}
         onClick={onOpen}
       />
-      <Drawer placement='right' onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay>
+      <Drawer
+        display={{sm: 'block', md: 'none'}} 
+        placement='right' 
+        onClose={onClose} 
+        isOpen={isOpen}
+      >
+        <DrawerOverlay
+          display={{sm: 'block', md: 'none'}} 
+        >
           <DrawerContent
             bg='#111927'
             color='brand.fg'
@@ -141,7 +224,7 @@ const Navbar = () => {
                   __css={menuLinksAfter}
                 >
                   <Link 
-                    href='#'
+                    href='#contact'
                     position='relative' 
                     _hover={menuLinksHover}
                     onClick={onClose}

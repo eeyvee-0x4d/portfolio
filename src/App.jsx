@@ -8,6 +8,8 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 function App() {
   
@@ -21,7 +23,14 @@ function App() {
     }
   }
 
-  const theme = extendTheme({ colors })
+  const breakpoints = {
+    sm: '320px',
+    md: '768px',
+    lg: '960px',
+    xl: '1200px'
+  }
+
+  const theme = extendTheme({ colors, breakpoints })
 
   return (
     <ChakraProvider theme={theme} resetCCSS={true}>
@@ -30,6 +39,8 @@ function App() {
         <Hero />
         <About />
         <Projects />
+        <Contact />
+        <Footer />
       </Box>
     </ChakraProvider>
   )

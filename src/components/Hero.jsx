@@ -14,17 +14,19 @@ import {
 
 const Hero = () => {
   return(
-    <Box 
+    <Flex 
       as='section'
       id='#hero'
-      px='2rem'
-      pt='8rem'
-      pb='6rem'
+      direction='column'
+      justify='center'
+      px={{sm: '2rem', md: '10%', xl: '15%'}}
+      py={{sm: '5rem', md: '0'}}
+      minHeight='100vh'
     >
       <Text
         as='p'
         color='brand.accent'
-        pb='1rem'
+        pb={{sm: '0'}}
         fontSize='lg'
       >
         Hey there! I am
@@ -33,17 +35,18 @@ const Hero = () => {
       as='h1'
         color='white'
         fontWeight='700'
-        fontSize='4xl'
+        fontSize={{sm: '3xl', md:'5xl'}}
       >Al Vincent Musa</Text>
       <Text
       as='h2'
       fontWeight='700'
-      fontSize='2xl'
+      fontSize={{sm: 'xl', md: '3xl'}}
       pb='1rem'
       >An artisan for the web. I build websites.</Text>
       <Text
         as='p'
         pb='2rem'
+        maxWidth='60ch'
       >
         I'm a web developer and a highly motivated individual ready to tackle real world challenges by building accessible and robust web solutions.
       </Text>
@@ -64,7 +67,7 @@ const Hero = () => {
         </Button>
       </Link>
       
-    </Box>
+    </Flex>
   )
 }
 
