@@ -1,4 +1,5 @@
 import logo from '../assets/logo.svg'
+import resume from '../assets/resume.pdf'
 
 import {
   Box,
@@ -75,10 +76,10 @@ const Navbar = () => {
       <Spacer />
       <Box
         as='nav'
-        display={{sm: 'none', md: 'block'}}
       >
         <Flex 
           as='ul'
+          display={{sm: 'none', md: 'flex'}}
           listStyleType='none'
           justify='center'
           align='center'
@@ -125,120 +126,101 @@ const Navbar = () => {
           </Box>
           <Box as='li'
           >
-            <Link 
-              href='/public/resume.pdf'
-              position='relative'
-              isExternal
+            <Button
+              bg='brand.accent2'
+              borderColor='brand.accent'
+              color='brand.accent'
+              variant='outline'
+              _hover={{
+                bg: 'brand.accent',
+                color: 'white'
+              }}
+              onClick={() => {
+                window.open(resume, '_blank')
+              }}
             >
-              <Button
-                bg='brand.accent2'
-                borderColor='brand.accent'
-                color='brand.accent'
-                variant='outline'
-                _hover={{
-                  bg: 'brand.accent',
-                  color: 'white'
-                }}
-              >Resume</Button>
-            </Link>
+              Resume
+            </Button>
           </Box>
         </Flex>
-      </Box>
-      <IconButton
-        display={{sm: 'block', md: 'none'}}
-        colorScheme="brand.fg"
-        _hover={{color: 'brand.accent'}}
-        variant='outline'
-        aria-label='Mobile Nav Button'
-        icon={<HamburgerIcon />}
-        onClick={onOpen}
-      />
-      <Drawer
-        display={{sm: 'block', md: 'none'}} 
-        placement='right' 
-        onClose={onClose} 
-        isOpen={isOpen}
-      >
-        <DrawerOverlay
+        <IconButton
+          display={{sm: 'block', md: 'none'}}
+          colorScheme="brand.fg"
+          _hover={{color: 'brand.accent'}}
+          variant='outline'
+          aria-label='Mobile Nav Button'
+          icon={<HamburgerIcon />}
+          onClick={onOpen}
+        />
+        <Drawer
           display={{sm: 'block', md: 'none'}} 
+          placement='right' 
+          onClose={onClose} 
+          isOpen={isOpen}
         >
-          <DrawerContent
-            bg='#111927'
-            color='brand.fg'
-            pt='3rem'
+          <DrawerOverlay
+            display={{sm: 'block', md: 'none'}} 
           >
-            <DrawerCloseButton
-              color="brand.fg"
-              _hover={{color: 'brand.accent'}}
-            />
-            <Box as='nav'>
-              <VStack 
-                as='ul'
-                pl='2rem'
-                align='start'
-                justify='center'
-                listStyleType='none'
-                spacing='1rem'
-                fontSize='2xl'
-              >
-                <Box
-                  as='li'
-                  position='relative'
-                  __css={menuLinksAfter}
+            <DrawerContent
+              bg='#111927'
+              color='brand.fg'
+              pt='3rem'
+            >
+              <DrawerCloseButton
+                color="brand.fg"
+                _hover={{color: 'brand.accent'}}
+              />
+              <Box as='nav'>
+                <VStack 
+                  as='ul'
+                  pl='2rem'
+                  align='start'
+                  justify='center'
+                  listStyleType='none'
+                  spacing='1rem'
+                  fontSize='2xl'
                 >
-                  <Link 
-                    href='#'
-                    _hover={menuLinksHover}
-                    onClick={onClose}
-                  >
-                    Home
-                  </Link>
-                </Box>
-                <Box as='li'
-                  position='relative'
-                  __css={menuLinksAfter}
-                >
-                  <Link 
-                    href='#about-me'
+                  <Box as='li'
                     position='relative'
-                    _hover={menuLinksHover}
-                    onClick={onClose}
+                    __css={menuLinksAfter}
                   >
-                    About Me
-                  </Link>
-                </Box>
-                <Box as='li'
-                  position='relative'
-                  __css={menuLinksAfter}
-                >
-                  <Link 
-                    href='#projects'
-                    position='relative' 
-                    _hover={menuLinksHover}
-                    onClick={onClose}
-                  >
-                    <Text>Projects</Text>
-                  </Link>
+                    <Link 
+                      href='#about-me'
+                      position='relative'
+                      _hover={menuLinksHover}
+                      onClick={onClose}
+                    >
+                      About Me
+                    </Link>
                   </Box>
-                <Box as='li'
-                  position='relative'
-                  __css={menuLinksAfter}
-                >
-                  <Link 
-                    href='#contact'
-                    position='relative' 
-                    _hover={menuLinksHover}
-                    onClick={onClose}
-                  >
-                    <Text>Contact</Text>
-                  </Link>
-                </Box>
-                <Box as='li'
-                >
-                  <Link 
-                    href='/public/resume.pdf'
+                  <Box as='li'
                     position='relative'
-                    isExternal
+                    __css={menuLinksAfter}
+                  >
+                    <Link 
+                      href='#projects'
+                      position='relative' 
+                      _hover={menuLinksHover}
+                      onClick={onClose}
+                    >
+                      <Text>Projects</Text>
+                    </Link>
+                    </Box>
+                  <Box as='li'
+                    position='relative'
+                    __css={menuLinksAfter}
+                  >
+                    <Link 
+                      href='#contact'
+                      position='relative' 
+                      _hover={menuLinksHover}
+                      onClick={onClose}
+                    >
+                      <Text>Contact</Text>
+                    </Link>
+                  </Box>
+                  <Box 
+                    as='li'
                   >
                     <Button
                       bg='brand.accent2'
@@ -249,14 +231,19 @@ const Navbar = () => {
                         bg: 'brand.accent',
                         color: 'white'
                       }}
-                    >Resume</Button>
-                  </Link>
-                </Box>
-              </VStack>
-            </Box>
-          </DrawerContent>    
-        </DrawerOverlay>
-      </Drawer>
+                      onClick={() => {
+                        window.open(resume, '_blank')
+                      }}
+                    >
+                      Resume
+                    </Button>
+                  </Box>
+                </VStack>
+              </Box>
+            </DrawerContent>    
+          </DrawerOverlay>
+        </Drawer>
+      </Box>
     </Flex>
   )
 }
