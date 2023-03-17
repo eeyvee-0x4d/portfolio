@@ -126,8 +126,9 @@ const Navbar = () => {
           <Box as='li'
           >
             <Link 
-              href='#'
+              href='/public/resume.pdf'
               position='relative'
+              isExternal
             >
               <Button
                 bg='brand.accent2'
@@ -230,6 +231,25 @@ const Navbar = () => {
                     onClick={onClose}
                   >
                     <Text>Contact</Text>
+                  </Link>
+                </Box>
+                <Box as='li'
+                >
+                  <Link 
+                    href='/public/resume.pdf'
+                    position='relative'
+                    isExternal
+                  >
+                    <Button
+                      bg='brand.accent2'
+                      borderColor='brand.accent'
+                      color='brand.accent'
+                      variant='outline'
+                      _hover={{
+                        bg: 'brand.accent',
+                        color: 'white'
+                      }}
+                    >Resume</Button>
                   </Link>
                 </Box>
               </VStack>

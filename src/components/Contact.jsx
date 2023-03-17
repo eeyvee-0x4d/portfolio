@@ -28,7 +28,9 @@ const Contact = () => {
       >
         I'm currently looking for opportunities to jumpstart my career in Web Development. Feel free to say Hello!
       </Text>
-      <Link>
+      <Link
+        href='mailto:a.v.musa2017@gmail.com'
+      >
         <Button
           bg='brand.accent2'
           borderColor='brand.accent'

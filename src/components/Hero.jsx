@@ -20,7 +20,8 @@ const Hero = () => {
       direction='column'
       justify='center'
       px={{sm: '2rem', md: '10%', xl: '15%'}}
-      py={{sm: '5rem', md: '0'}}
+      pt='4.5rem'
+      pb={{sm: '5rem', md: '0'}}
       minHeight='100vh'
     >
       <Text

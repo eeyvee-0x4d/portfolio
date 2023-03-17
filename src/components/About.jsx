@@ -30,7 +30,6 @@ const About = () => {
       </Text>
       <Flex
         direction={{sm: 'column-reverse', md: 'row'}}
-        justify='center'
         align={{sm: 'center', md: 'start'}}
         gap='3rem'
       >
@@ -68,6 +67,7 @@ const About = () => {
         </Box>
         <Box
           flexBasis={{md: '50%'}}
+          mx='auto'
           borderRadius='base'
           position='relative'
           boxSize={{sm: '200px', md: '300px'}}
