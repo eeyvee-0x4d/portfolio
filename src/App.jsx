@@ -1,9 +1,22 @@
 import { 
   ChakraProvider,
   extendTheme ,
-  Box
+  Box,
+  chakra
 } from '@chakra-ui/react'
 
+import {
+  motion,
+  isValidMotionProp
+} from 'framer-motion'
+
+
+import {
+  useState,
+  useEffect
+} from 'react'
+
+import Loading from './components/Loading'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -32,9 +45,71 @@ function App() {
 
   const theme = extendTheme({ colors, breakpoints })
 
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    window.onload = () => {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const ChakraBox = chakra(motion.div, {
+    shouldForwardProp: (prop) => isValidMotionProp || shouldForwardProp(prop)
+  })
+
+  const Content = () => {
+    return(
+      <Box position='relative' bg="brand.bg" color="brand.fg">
+        <Loading isLoading={isLoading} />
+        <motion.div
+          position='absolute'
+          top='0'
+          left='0'
+          right='0'
+          bottom='0'
+          opacity={isLoading ? 0 : 1}
+          animate={{opacity: 1}}
+          transition={{duration: 0.5}}
+        >
+          <Navbar />
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+          <Footer />
+        </motion.div>
+      </Box>
+    )
+  }
+
   return (
     <ChakraProvider theme={theme} resetCCSS={true}>
-      <Box bg="brand.bg" color="brand.fg">
+      <Box position='relative' bg="brand.bg" color="brand.fg">
+        <Loading isLoading={isLoading} />
+        <ChakraBox
+          position='absolute'
+          top='0'
+          left='0'
+          right='0'
+          bottom='0'
+          opacity={isLoading ? 0 : 1}
+          animate={{
+            opacity: 1
+          }}
+          transition={{
+            duration: 0.5
+          }}
+
+        >
+          <Navbar />
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+          <Footer />
+        </ChakraBox>
+      </Box>
+      {/*<Box bg="brand.bg" color="brand.fg">
         <Navbar />
         <Hero />
         <About />
@@ -42,7 +117,7 @@ function App() {
         <Contact />
         <Footer />
       </Box>
-    </ChakraProvider>
+*/}    </ChakraProvider>
   )
 }
 

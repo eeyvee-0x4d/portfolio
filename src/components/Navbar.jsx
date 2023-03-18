@@ -71,7 +71,7 @@ const Navbar = () => {
         href='#'
         tabIndex={0}
       >
-        <Image src={logo} h='2rem' alt='logo'/> 
+        <Image src={logo} h='1.8rem' alt='logo'/> 
       </Link>
       <Spacer />
       <Box
