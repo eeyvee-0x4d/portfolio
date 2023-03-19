@@ -26,7 +26,7 @@ const Loading = ({ isLoading }) => {
       color='white'
     >
       <Image src={logo} boxSize={{sm: '4rem', md: '8rem'}}/>
-      <Progress bg='brand.accent2' colorScheme='cyan' size={{sm: 'xs', md: 'sm'}} borderRadius='full' w={{sm: '150px', md: '300px'}} isIndeterminate/>
+      <Progress bg='brand.accent2' colorScheme='cyan' size={{sm: 'xs', md: 'sm'}} borderRadius='full' width='300px' isIndeterminate/>
     </Flex>
   )
 }

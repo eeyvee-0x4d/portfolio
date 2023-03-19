@@ -22,6 +22,8 @@ import loopstudios from '../assets/loopstudios.png'
 import newsHomepage from '../assets/news-homepage.png'
 import tipCalculator from '../assets/tip-calculator.png'
 
+import { v4 as uuidv4} from 'uuid'
+
 const Projects = () => {
 
   const projects = [
@@ -84,8 +86,11 @@ const Projects = () => {
       >
         {
           projects.map(project => {
+            const uniqueId = uuidv4()
+
             return(
               <Card
+                key={uniqueId}
                 bg='brand.neutral1'
                 color='brand.fg'
                 overflow='hidden'

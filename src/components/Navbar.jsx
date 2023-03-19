@@ -26,9 +26,14 @@ import {
   HamburgerIcon
 } from '@chakra-ui/icons'
 
+import {
+  useRef
+} from 'react'
+
 const Navbar = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const finalRef = useRef()
 
   const menuLinksHover = {
     color: "brand.accent",
@@ -55,77 +60,82 @@ const Navbar = () => {
     }
   }
 
+  const navLinksStyle = {
+    position: 'relative',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+      color: 'white'
+    },
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      left: '0',
+      bottom: '0',
+      border: '1px solid',
+      borderColor: 'cyan.400',
+      borderRadius: 'full',
+      width: '0',
+      opacity: '0',
+      transition: 'all 0.3s ease-in-out'
+    },
+    '&:hover::before': {
+      width: '100%',
+      opacity: '1'
+    }
+  }
+
   return(
     <Flex
-      position={{sm: 'fixed'}}
+      id='nav-wrapper'
+      position='absolute'
       top='0'
-      w='100vw'
-      px={{sm: '2rem', md: '10%', xl:'15%'}}
-      py='1rem'
-      align='center'
+      left='0'
       backgroundImage="linear-gradient(90deg, rgb(31, 45, 66), rgb(45, 66, 97))"
       boxShadow='rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px'
-      zIndex="999"
+      width="100%"
+      height='4rem'
+      zIndex='99'
     >
-      <Link 
-        href='#'
-        tabIndex={0}
+      <Flex
+        direction='row'
+
+        align='center'
+        basis='full'
+        py='1rem'
+        px={{sm: '2rem', md: '10%', xl:'15%'}}
       >
-        <Image src={logo} h='1.8rem' alt='logo'/> 
-      </Link>
-      <Spacer />
-      <Box
-        as='nav'
-      >
-        <Flex 
-          as='ul'
-          display={{sm: 'none', md: 'flex'}}
-          listStyleType='none'
-          justify='center'
-          align='center'
-          gap='2rem'
+        <Image
+          src={logo}
+          height='1.2rem'
+        />
+        <Spacer />
+        <Box
+          as='nav'
         >
-          <Box as='li'
-            position='relative'
-            __css={menuLinksAfter}
+          <Flex
+            display={{sm: 'none', md: 'flex'}}
+            gap='2rem'
+            align='center'
           >
-            <Link 
+            <Link
               href='#about-me'
-              position='relative'
-              _hover={menuLinksHover}
-              onClick={onClose}
+              sx={ navLinksStyle }
             >
-              About Me
+              About
             </Link>
-          </Box>
-          <Box as='li'
-            position='relative'
-            __css={menuLinksAfter}
-          >
-            <Link 
+            <Link
               href='#projects'
-              position='relative' 
-              _hover={menuLinksHover}
-              onClick={onClose}
+              sx={ navLinksStyle }
             >
-              <Text>Projects</Text>
+              Projects
             </Link>
-            </Box>
-          <Box as='li'
-            position='relative'
-            __css={menuLinksAfter}
-          >
-            <Link 
+            <Link
               href='#contact'
-              position='relative' 
-              _hover={menuLinksHover}
-              onClick={onClose}
+              sx={ navLinksStyle }
             >
-              <Text>Contact</Text>
+              Contact
             </Link>
-          </Box>
-          <Box as='li'
-          >
             <Button
               bg='brand.accent2'
               borderColor='brand.accent'
@@ -141,87 +151,65 @@ const Navbar = () => {
             >
               Resume
             </Button>
-          </Box>
-        </Flex>
-        <IconButton
-          display={{sm: 'block', md: 'none'}}
-          colorScheme="brand.fg"
-          _hover={{color: 'brand.accent'}}
-          variant='outline'
-          aria-label='Mobile Nav Button'
-          icon={<HamburgerIcon />}
-          onClick={onOpen}
-        />
-        <Drawer
-          display={{sm: 'block', md: 'none'}} 
-          placement='right' 
-          onClose={onClose} 
-          isOpen={isOpen}
-        >
-          <DrawerOverlay
-            display={{sm: 'block', md: 'none'}} 
+          </Flex>
+          <Flex
+            display={{md:'none'}}
           >
-            <DrawerContent
-              bg='#111927'
-              color='brand.fg'
-              pt='3rem'
+            <IconButton
+              display={{sm: 'block', md: 'none'}}
+              colorScheme="brand.fg"
+              _hover={{color: 'brand.accent'}}
+              variant='outline'
+              aria-label='Mobile Nav Button'
+              icon={<HamburgerIcon />}
+              onClick={onOpen}
+            />
+            <Drawer
+              display={{sm: 'block', md: 'none'}} 
+              placement='right' 
+              onClose={onClose} 
+              isOpen={isOpen}
+              finalFocusRef={ finalRef }
             >
-              <DrawerCloseButton
-                color="brand.fg"
-                _hover={{color: 'brand.accent'}}
-              />
-              <Box as='nav'>
-                <VStack 
-                  as='ul'
-                  pl='2rem'
-                  align='start'
-                  justify='center'
-                  listStyleType='none'
-                  spacing='1rem'
-                  fontSize='2xl'
+              <DrawerOverlay
+                display={{sm: 'block', md: 'none'}} 
+              >
+                <DrawerContent
+                  bg='#111927'
+                  color='brand.fg'
+                  pt='3rem'
                 >
-                  <Box as='li'
-                    position='relative'
-                    __css={menuLinksAfter}
+                  <DrawerCloseButton
+                    color="brand.fg"
+                    _hover={{color: 'brand.accent'}}
+                  />
+                  <VStack
+                    p='2rem'
+                    align='start'
+                    fontSize='2xl'
+                    gap='1rem'
                   >
-                    <Link 
+                    <Link
                       href='#about-me'
-                      position='relative'
-                      _hover={menuLinksHover}
-                      onClick={onClose}
+                      sx={ navLinksStyle }
+                      onClick={ onClose }
                     >
-                      About Me
+                      About
                     </Link>
-                  </Box>
-                  <Box as='li'
-                    position='relative'
-                    __css={menuLinksAfter}
-                  >
-                    <Link 
+                    <Link
                       href='#projects'
-                      position='relative' 
-                      _hover={menuLinksHover}
-                      onClick={onClose}
+                      sx={ navLinksStyle }
+                      onClick={ onClose }
                     >
-                      <Text>Projects</Text>
+                      Projects
                     </Link>
-                    </Box>
-                  <Box as='li'
-                    position='relative'
-                    __css={menuLinksAfter}
-                  >
-                    <Link 
+                    <Link
                       href='#contact'
-                      position='relative' 
-                      _hover={menuLinksHover}
-                      onClick={onClose}
+                      sx={ navLinksStyle }
+                      onClick={ onClose }
                     >
-                      <Text>Contact</Text>
+                      Contact
                     </Link>
-                  </Box>
-                  <Box 
-                    as='li'
-                  >
                     <Button
                       bg='brand.accent2'
                       borderColor='brand.accent'
@@ -232,20 +220,213 @@ const Navbar = () => {
                         color: 'white'
                       }}
                       onClick={() => {
+                        onClose()
                         window.open(resume, '_blank')
                       }}
                     >
                       Resume
                     </Button>
-                  </Box>
-                </VStack>
-              </Box>
-            </DrawerContent>    
-          </DrawerOverlay>
-        </Drawer>
-      </Box>
+                  </VStack>
+                </DrawerContent>    
+              </DrawerOverlay>
+            </Drawer>
+          </Flex>
+        </Box>
+      </Flex>
     </Flex>
   )
+
+  // return(
+  //   <Flex
+  //     position={{sm: 'fixed'}}
+  //     top='0'
+  //     w='100vw'
+  //     px={{sm: '2rem', md: '10%', xl:'15%'}}
+  //     py='1rem'
+  //     align='center'
+  //     backgroundImage="linear-gradient(90deg, rgb(31, 45, 66), rgb(45, 66, 97))"
+  //     boxShadow='rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px'
+  //     zIndex="999"
+  //   >
+  //     <Link 
+  //       href='#'
+  //       tabIndex={0}
+  //     >
+  //       <Image src={logo} h='1.8rem' alt='logo'/> 
+  //     </Link>
+  //     <Spacer />
+  //     <Box
+  //       as='nav'
+  //     >
+  //       <Flex 
+  //         as='ul'
+  //         display={{sm: 'none', md: 'flex'}}
+  //         listStyleType='none'
+  //         justify='center'
+  //         align='center'
+  //         gap='2rem'
+  //       >
+  //         <Box as='li'
+  //           position='relative'
+  //           __css={menuLinksAfter}
+  //         >
+  //           <Link 
+  //             href='#about-me'
+  //             position='relative'
+  //             _hover={menuLinksHover}
+  //             onClick={onClose}
+  //           >
+  //             About Me
+  //           </Link>
+  //         </Box>
+  //         <Box as='li'
+  //           position='relative'
+  //           __css={menuLinksAfter}
+  //         >
+  //           <Link 
+  //             href='#projects'
+  //             position='relative' 
+  //             _hover={menuLinksHover}
+  //             onClick={onClose}
+  //           >
+  //             <Text>Projects</Text>
+  //           </Link>
+  //           </Box>
+  //         <Box as='li'
+  //           position='relative'
+  //           __css={menuLinksAfter}
+  //         >
+  //           <Link 
+  //             href='#contact'
+  //             position='relative' 
+  //             _hover={menuLinksHover}
+  //             onClick={onClose}
+  //           >
+  //             <Text>Contact</Text>
+  //           </Link>
+  //         </Box>
+  //         <Box as='li'
+  //         >
+  //           <Button
+  //             bg='brand.accent2'
+  //             borderColor='brand.accent'
+  //             color='brand.accent'
+  //             variant='outline'
+  //             _hover={{
+  //               bg: 'brand.accent',
+  //               color: 'white'
+  //             }}
+  //             onClick={() => {
+  //               window.open(resume, '_blank')
+  //             }}
+  //           >
+  //             Resume
+  //           </Button>
+  //         </Box>
+  //       </Flex>
+  //       <IconButton
+  //         display={{sm: 'block', md: 'none'}}
+  //         colorScheme="brand.fg"
+  //         _hover={{color: 'brand.accent'}}
+  //         variant='outline'
+  //         aria-label='Mobile Nav Button'
+  //         icon={<HamburgerIcon />}
+  //         onClick={onOpen}
+  //       />
+  //       <Drawer
+  //         display={{sm: 'block', md: 'none'}} 
+  //         placement='right' 
+  //         onClose={onClose} 
+  //         isOpen={isOpen}
+  //       >
+  //         <DrawerOverlay
+  //           display={{sm: 'block', md: 'none'}} 
+  //         >
+  //           <DrawerContent
+  //             bg='#111927'
+  //             color='brand.fg'
+  //             pt='3rem'
+  //           >
+  //             <DrawerCloseButton
+  //               color="brand.fg"
+  //               _hover={{color: 'brand.accent'}}
+  //             />
+  //             <Box as='nav'>
+  //               <VStack 
+  //                 as='ul'
+  //                 pl='2rem'
+  //                 align='start'
+  //                 justify='center'
+  //                 listStyleType='none'
+  //                 spacing='1rem'
+  //                 fontSize='2xl'
+  //               >
+  //                 <Box as='li'
+  //                   position='relative'
+  //                   __css={menuLinksAfter}
+  //                 >
+  //                   <Link 
+  //                     href='#about-me'
+  //                     position='relative'
+  //                     _hover={menuLinksHover}
+  //                     onClick={onClose}
+  //                   >
+  //                     About Me
+  //                   </Link>
+  //                 </Box>
+  //                 <Box as='li'
+  //                   position='relative'
+  //                   __css={menuLinksAfter}
+  //                 >
+  //                   <Link 
+  //                     href='#projects'
+  //                     position='relative' 
+  //                     _hover={menuLinksHover}
+  //                     onClick={onClose}
+  //                   >
+  //                     <Text>Projects</Text>
+  //                   </Link>
+  //                   </Box>
+  //                 <Box as='li'
+  //                   position='relative'
+  //                   __css={menuLinksAfter}
+  //                 >
+  //                   <Link 
+  //                     href='#contact'
+  //                     position='relative' 
+  //                     _hover={menuLinksHover}
+  //                     onClick={onClose}
+  //                   >
+  //                     <Text>Contact</Text>
+  //                   </Link>
+  //                 </Box>
+  //                 <Box 
+  //                   as='li'
+  //                 >
+  //                   <Button
+  //                     bg='brand.accent2'
+  //                     borderColor='brand.accent'
+  //                     color='brand.accent'
+  //                     variant='outline'
+  //                     _hover={{
+  //                       bg: 'brand.accent',
+  //                       color: 'white'
+  //                     }}
+  //                     onClick={() => {
+  //                       window.open(resume, '_blank')
+  //                     }}
+  //                   >
+  //                     Resume
+  //                   </Button>
+  //                 </Box>
+  //               </VStack>
+  //             </Box>
+  //           </DrawerContent>    
+  //         </DrawerOverlay>
+  //       </Drawer>
+  //     </Box>
+  //   </Flex>
+  // )
 }
 
 export default Navbar
