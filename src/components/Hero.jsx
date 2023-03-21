@@ -26,8 +26,7 @@ const Hero = () => {
       direction='column'
       justify='center'
       px={{sm: '2rem', md: '10%', xl: '15%'}}
-      pt='4.5rem'
-      pb={{sm: '5rem', md: '0'}}
+      py='100px'
       minHeight='100vh'
       __css={{
         '&::before': {
@@ -49,6 +48,7 @@ const Hero = () => {
         justify='center'
         my='auto'
         zIndex='3'
+        maxWidth='1000px'
       >
         <Text
           as='p'
@@ -77,7 +77,11 @@ const Hero = () => {
         >
           I'm a web developer and a highly motivated individual ready to tackle real world challenges by building accessible and robust web solutions.
         </Text>
-        <Link href='#projects'
+        <Link 
+          href='#projects'
+          _hover={{
+            textDecoration: 'none'
+          }}
         >
           <Button
             bg='brand.accent2'

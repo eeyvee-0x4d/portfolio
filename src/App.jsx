@@ -1,9 +1,22 @@
 import { 
   ChakraProvider,
   extendTheme ,
-  Box
+  Box,
+  chakra
 } from '@chakra-ui/react'
 
+import {
+  motion,
+  isValidMotionProp
+} from 'framer-motion'
+
+
+import {
+  useState,
+  useEffect
+} from 'react'
+
+import Loading from './components/Loading'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -32,9 +45,25 @@ function App() {
 
   const theme = extendTheme({ colors, breakpoints })
 
-  return (
-    <ChakraProvider theme={theme} resetCCSS={true}>
-      <Box bg="brand.bg" color="brand.fg">
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    window.onload = () => {
+      setIsLoading(false)
+    }
+  }, [])
+
+  const ChakraBox = chakra(motion.div, {
+    shouldForwardProp: (prop) => isValidMotionProp || shouldForwardProp(prop)
+  })
+
+  const Content = () => {
+    return(
+      <Box
+        position='relative' 
+        bg="brand.bg" 
+        color="brand.fg"
+      >
         <Navbar />
         <Hero />
         <About />
@@ -42,6 +71,12 @@ function App() {
         <Contact />
         <Footer />
       </Box>
+    )
+  }
+
+  return (
+    <ChakraProvider theme={theme} resetCCSS={true}>
+      <Content />
     </ChakraProvider>
   )
 }

@@ -22,6 +22,8 @@ import loopstudios from '../assets/loopstudios.png'
 import newsHomepage from '../assets/news-homepage.png'
 import tipCalculator from '../assets/tip-calculator.png'
 
+import { v4 as uuidv4} from 'uuid'
+
 const Projects = () => {
 
   const projects = [
@@ -63,97 +65,113 @@ const Projects = () => {
     <Box
       as='section'
       id='projects'
-      px={{sm: '2rem', md: '10%'}}
-      py='4.5rem'
+      px={{sm: '2rem', md: '10%', xl: '0'}}
+      py='100px'
+      mx='auto'
+      maxWidth='1000px'
     >
-      <Heading
-        as='h2'
-        color='white'
-        fontSize='2xl'
-        fontWeight='700'
-        mb='2rem'
+      <Box
+        mx='auto'
+        maxWidth='1000px'
       >
-        Projects
-      </Heading>
-      <Flex
-        direction={{sm: 'column', md: 'row'}}
-        justify='center'
-        align='center'
-        flexWrap='wrap'
-        gap='2rem'
-      >
-        {
-          projects.map(project => {
-            return(
-              <Card
-                bg='brand.neutral1'
-                color='brand.fg'
-                overflow='hidden'
-                variant='elevated'
-                maxWidth={{sm: '768px', md: '400px'}}
-              >
-                <Image
-                  src={project.image}
-                  objectFit='cover'
-                />
-                <CardHeader>
-                  <Heading 
-                    color='white' 
-                    as='h3' 
-                    fontSize='xl'
-                    fontWeight='400'
-                    transition='color 0.2s ease-in-out'
-                    _hover={{
-                      color: 'brand.accent'
-                    }}
-                    >
-                      {project.name}
-                  </Heading>
-                </CardHeader>
-                <Stack>
-                  <Flex px='1rem' gap='1rem'>
-                    {
-                      project.techStack.map(item => {
-                      return(
-                        <Badge colorScheme='cyan' variant='outline'>{item}</Badge>
-                      )})
-                    }
-                  </Flex>
-                  <CardBody>
-                    <Text>
-                      {project.description}
-                    </Text>
-                  </CardBody>
-                  <CardFooter>
-                    <Flex>
-                      <Link
-                        href={project.sourceCodeURL}
-                        transition='all 0.2s ease-in-out'
-                        _hover={{
-                          color: 'brand.accent'
-                        }}
-                        isExternal
+        <Heading
+          as='h2'
+          color='white'
+          fontSize='2xl'
+          fontWeight='700'
+          mb='2rem'
+          transition='color 0.3s ease-in-out'
+          _hover={{
+            color: 'brand.accent'
+          }}
+        >
+          Projects
+        </Heading>
+        <Flex
+          direction={{sm: 'column', md: 'row'}}
+          justify='center'
+          align='center'
+          flexWrap='wrap'
+          gap='2rem'
+        >
+          {
+            projects.map(project => {
+              const uniqueId = uuidv4()
+
+              return(
+                <Card
+                  key={uniqueId}
+                  bg='brand.neutral1'
+                  color='brand.fg'
+                  overflow='hidden'
+                  variant='elevated'
+                  maxWidth={{sm: '768px', md: '400px'}}
+                >
+                  <Image
+                    src={project.image}
+                    objectFit='cover'
+                  />
+                  <CardHeader>
+                    <Heading 
+                      color='white' 
+                      as='h3' 
+                      fontSize='xl'
+                      fontWeight='400'
+                      transition='color 0.2s ease-in-out'
+                      _hover={{
+                        color: 'brand.accent'
+                      }}
                       >
-                        <GithubIcon mx='0.5rem' boxSize='1.5rem' />
-                      </Link>
-                      <Link
-                        href={project.previewURL}
-                        transition='all 0.2s ease-in-out'
-                        _hover={{
-                          color: 'brand.accent'
-                        }}
-                        isExternal
-                      >
-                        <ExternalLinkIcon mx='0.5rem' boxSize='1.5rem' />
-                      </Link>
+                        {project.name}
+                    </Heading>
+                  </CardHeader>
+                  <Stack>
+                    <Flex px='1rem' gap='1rem'>
+                      {
+                        project.techStack.map(item => {
+                        return(
+                          <Badge colorScheme='cyan' variant='outline'>{item}</Badge>
+                        )})
+                      }
                     </Flex>
-                  </CardFooter>
-                </Stack>
-              </Card>
-            )
-          })
-        }
-      </Flex>
+                    <CardBody
+                      minHeight='100px'
+                    >
+                      <Text>
+                        {project.description}
+                      </Text>
+                    </CardBody>
+                    <CardFooter>
+                      <Flex>
+                        <Link
+                          href={project.sourceCodeURL}
+                          transition='all 0.2s ease-in-out'
+                          _hover={{
+                            color: 'brand.accent'
+                          }}
+                          isExternal
+                        >
+                          <GithubIcon mx='0.5rem' boxSize='1.5rem' />
+                        </Link>
+                        <Link
+                          href={project.previewURL}
+                          transition='all 0.2s ease-in-out'
+                          _hover={{
+                            color: 'brand.accent'
+                          }}
+                          isExternal
+                        >
+                          <ExternalLinkIcon mx='0.5rem' boxSize='1.5rem' />
+                        </Link>
+                      </Flex>
+                    </CardFooter>
+                  </Stack>
+                </Card>
+              )
+            })
+          }
+        </Flex>
+      </Box>
     </Box>
   )
 }
