@@ -21,6 +21,7 @@ import {
 import loopstudios from '../assets/loopstudios.png'
 import newsHomepage from '../assets/news-homepage.png'
 import tipCalculator from '../assets/tip-calculator.png'
+import portfolio from '../assets/portfolio.png'
 
 import { v4 as uuidv4} from 'uuid'
 
@@ -50,6 +51,14 @@ const Projects = () => {
       sourceCodeURL: 'https://github.com/eeyvee-0x4d/fmentor-tip-calculator',
       previewURL: 'https://bespoke-froyo-3a029c.netlify.app/',
       techStack: ['reactjs', 'tailwindcss']
+    },
+    {
+      name: 'Portfolio Website',
+      description: 'A portfolio website made to showcase my personal projects.',
+      image: portfolio,
+      sourceCodeURL: 'https://github.com/eeyvee-0x4d/portfolio',
+      previewURL: 'https://eeyvee-0x4d.github.io/portfolio/',
+      techStack: ['reactjs', 'chakraui']
     }
   ]
 
