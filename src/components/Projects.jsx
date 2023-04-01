@@ -22,6 +22,7 @@ import loopstudios from '../assets/loopstudios.png'
 import newsHomepage from '../assets/news-homepage.png'
 import tipCalculator from '../assets/tip-calculator.png'
 import portfolio from '../assets/portfolio.png'
+import adviceGenerator from '../assets/advice-generator.png'
 
 import { v4 as uuidv4} from 'uuid'
 
@@ -38,7 +39,7 @@ const Projects = () => {
     },
     {
       name: 'News homepage',
-      description: 'A new site landing page design from FrontendMentor.',
+      description: 'A news site landing page design from FrontendMentor.',
       image: newsHomepage,
       sourceCodeURL: 'https://github.com/eeyvee-0x4d/fmentor-news-homepage',
       previewURL: 'https://majestic-starship-732163.netlify.app/',
@@ -59,6 +60,14 @@ const Projects = () => {
       sourceCodeURL: 'https://github.com/eeyvee-0x4d/portfolio',
       previewURL: 'https://eeyvee-0x4d.github.io/portfolio/',
       techStack: ['reactjs', 'chakraui']
+    },
+        {
+      name: 'Advice Generator',
+      description: 'An advice generator web app from FrontendMentor.',
+      image: adviceGenerator,
+      sourceCodeURL: 'https://github.com/eeyvee-0x4d/fmentor-advice-generator',
+      previewURL: 'https://fmentor-advice-generator.netlify.app',
+      techStack: ['reactjs', 'tailwindcss', 'adviceslip api']
     }
   ]
 
@@ -101,7 +110,7 @@ const Projects = () => {
           justify='center'
           align='center'
           flexWrap='wrap'
-          gap='2rem'
+          gap='1rem'
         >
           {
             projects.map(project => {
@@ -114,7 +123,7 @@ const Projects = () => {
                   color='brand.fg'
                   overflow='hidden'
                   variant='elevated'
-                  maxWidth={{sm: '768px', md: '400px'}}
+                  maxWidth={{sm: '768px', md: '300px'}}
                 >
                   <Image
                     src={project.image}
